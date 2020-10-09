@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    @auth()
+                        {{ ucfirst(__('hi'))}} {{auth()->user()->name}} {{'!'}}
+                    @endguest
                 </div>
             </div>
         </div>
