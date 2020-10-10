@@ -15,11 +15,11 @@ class CreatePANSTable extends Migration
     {
         Schema::create('p_a_n_s', function (Blueprint $table) {
             $table->id();
-            $table->varchar("PAN",25)->unique();
+            $table->string("PAN",25)->unique();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            
-           $table->foreign('user_id')->reference('id')->on('users');
+
+           $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
