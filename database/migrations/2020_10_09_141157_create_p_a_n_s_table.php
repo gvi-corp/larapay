@@ -16,6 +16,8 @@ class CreatePANSTable extends Migration
         Schema::create('p_a_n_s', function (Blueprint $table) {
             $table->id();
             $table->string("PAN",25)->unique();
+            $table->string("name");
+            $table->text("description");
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
