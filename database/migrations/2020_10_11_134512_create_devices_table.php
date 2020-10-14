@@ -16,10 +16,14 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->text("description")->default('');
+            $table->enum('type', ['Smartphone', 'Tablet', 'Watch', 'Other'])->default('Smartphone');
+            $table->enum('os', ['Android', 'iOS', 'Other'])->default('Android');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unique(['user_id', 'name'], 'user_unique_device_name');
         });
     }
 

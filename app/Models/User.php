@@ -67,7 +67,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function pans(){
+    public function pans()
+    {
         return $this->hasMany(PAN::class);
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
+
+    public function digitized_cards()
+    {
+        return $this->hasMany(DigitizedCard::class);
     }
 }

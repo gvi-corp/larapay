@@ -27,12 +27,19 @@ class StorePAN extends FormRequest
             'pan' => [
                 'pan.required' => 'required',
                 'pan.filled' => 'filled',
+                'pan.integer' => 'integer',
                 //requiring Mastercard PAN pattern
                 'pan.regex' => 'regex:/^5[1-5]\d{14}$/',
                 //requiring Visa PAN pattern
                 //'regex:^4\d{15}$'
                 'pan.unique' => 'unique:p_a_n_s,pan'
-            ]
+            ],
+            'name' => [
+                'name.required' => 'required',
+                'name.filled' => 'filled',
+                'name.unique' => 'unique:p_a_n_s,name,user_id'
+            ],
+            'description' => 'nullable|string'
         ];
     }
 
@@ -41,8 +48,12 @@ class StorePAN extends FormRequest
         return [
             'pan.required' => 'Required !',
             'pan.filled' => 'Must not be empty !',
+            'pan.integer' => 'Please Enter a Number !',
             'pan.regex' => 'Wrong PAN Pattern !',
-            'pan.unique' => 'Already in use !'
+            'pan.unique' => 'Already in use !',
+            'name.required' => 'Required !',
+            'name.filled' => 'Must not be empty !',
+            'name.unique' => 'Already in use !'
         ];
     }
 

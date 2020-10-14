@@ -21,6 +21,11 @@ class PAN extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function digitized_cards()
+    {
+        return $this->hasMany(DigitizedCard::class, 'pan_id');
+    }
+
     public function show(){
 
     }

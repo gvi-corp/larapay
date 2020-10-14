@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePAN extends FormRequest
 {
@@ -25,22 +26,25 @@ class UpdatePAN extends FormRequest
     {
         return [
             'pan' => [
-                'pan.required' => 'required',
-                'pan.filled' => 'filled',
                 //requiring Mastercard PAN pattern
                 'pan.regex' => 'regex:/^5[1-5]\d{14}$/',
                 //requiring Visa PAN pattern
                 //'regex:^4\d{15}$'
-            ]
+                'pan.unique' => Rule::unique('p_a_n_s','pan')->ignore($this->route('pan'))
+            ],
+            'name' => [
+                'name.unique' => Rule::unique('p_a_n_s','name')->ignore($this->route('pan'))
+            ],
+            'description' => 'nullable|string'
         ];
     }
 
     public function messages()
     {
         return [
-            'pan.required' => 'Required !',
-            'pan.filled' => 'Must not be empty !',
             'pan.regex' => 'Wrong PAN Pattern !',
+            'pan.unique' => 'Already in use !',
+            'name.unique' => 'Already in use !',
         ];
     }
 
