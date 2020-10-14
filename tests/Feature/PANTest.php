@@ -49,14 +49,14 @@ class PANTest extends TestCase
             "name" => $this->faker->unique()->words(5, true),
             "pan" => intval("51" . $this->faker->unique()->numerify(implode(array_fill(0, 14, '#')))),
             "description" => "PAN A",
-            //"user_id" => $user->id
+            "user_id" => $user->id
         ];
 
         $pan_b_attributes = [
             "name" => $this->faker->unique()->words(5, true),
             "pan" => intval("51" . $this->faker->unique()->numerify(implode(array_fill(0, 14, '#')))),
             "description" => "PAN B",
-            //"user_id" => $user->id
+            "user_id" => $user->id
         ];
 
         $pan_a = PAN::make($pan_a_attributes);
@@ -75,7 +75,7 @@ class PANTest extends TestCase
             "type" => "Smartphone",
             "os" => "iOS",
             "description" => "Device A",
-            //"user_id" => $user->id
+            "user_id" => $user->id
         ];
 
         $device_b_attributes = [
@@ -83,7 +83,7 @@ class PANTest extends TestCase
             "type" => "Tablet",
             "os" => "Android",
             "description" => "Device B",
-            //"user_id" => $user->id
+            "user_id" => $user->id
         ];
 
         $device_a = Device::make($device_a_attributes);
