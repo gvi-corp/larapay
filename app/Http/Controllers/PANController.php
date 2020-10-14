@@ -40,7 +40,7 @@ class PANController extends Controller
         $pan = PAN::make($request->validated());
         $pan->user_id = auth()->user()->id;
         $pan->save();
-        return redirect(route('pan.show', ['pan' => $pan]));
+        return redirect(route('pan.show', ['pan' => $pan]))->with('status', 'Nouveau PAN enregistré !');
     }
 
     /**

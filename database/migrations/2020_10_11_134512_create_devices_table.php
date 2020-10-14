@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePANSTable extends Migration
+class CreateDevicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreatePANSTable extends Migration
      */
     public function up()
     {
-        Schema::create('p_a_n_s', function (Blueprint $table) {
+        Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string("PAN",25)->unique();
             $table->string("name");
             $table->text("description")->default('');
+            $table->enum('type', ['Smartphone', 'Tablet', 'Watch', 'Other'])->default('Smartphone');
+            $table->enum('os', ['Android', 'iOS', 'Other'])->default('Android');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-           $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unique(['user_id', 'name'], 'user_unique_device_name');
         });
     }
 
@@ -32,6 +34,6 @@ class CreatePANSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_a_n_s');
+        Schema::dropIfExists('devices');
     }
 }

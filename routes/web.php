@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DigitizedCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PANController;
 
@@ -23,3 +25,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('pan',PANController::class);
+Route::resource('digitized_card', DigitizedCardController::class);
+Route::resource('device', DeviceController::class);

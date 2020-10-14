@@ -7,6 +7,6 @@
                 {{ session('status') }}
             </div>
         @endif
-        @include('pan.partial.show',['pan' => $pan])
+        @include('digitized_card.partial.show',['digitized_card' => $digitized_card])
     </div>
 @endsection

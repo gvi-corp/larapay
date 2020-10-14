@@ -8,14 +8,34 @@
                     @csrf
                     @method('POST')
                     <div class="form-group">
-                        <label for="pan">Primary Account Number</label>
-                        <input type="text" class="form-control" id="pan" aria-describedby="pan"
+                        <label for="pan-pan">Primary Account Number</label>
+                        <input type="text" class="form-control" id="pan-pan" aria-describedby="pan"
                                name="pan"
                                placeholder="Enter your Primary Account Number"
                                maxlength="16">
-                        @if($errors->any())
+                        @error('pan')
                         <small id="pan_error" class="form-text text-muted alert-danger">{{$errors->first('pan')}}</small>
-                        @endif
+                        @enderror
+
+                        <label for="pan-name">PAN Name</label>
+                        <input type="text" class="form-control" id="pan-name" aria-describedby="pan-name"
+                               name="name"
+                               placeholder="Enter PAN Name"
+                        >
+                        @error('name')
+                        <small id="pan_name_error" class="form-text text-muted alert-danger">{{$errors->first('name')}}</small>
+                        @enderror
+
+                        <label for="pan-desc">PAN description</label>
+                        <textarea class="form-control" id="pan-desc" aria-describedby="pan_desc"
+                                  name="description"
+                                  placeholder="Enter your PAN Description"
+                        >
+                        </textarea>
+                        @error('description')
+                        <small id="pan_desc_error"
+                               class="form-text text-muted alert-danger">{{$errors->first('description')}}</small>
+                        @enderror
 
                         <input type="submit" value="Submit">
 

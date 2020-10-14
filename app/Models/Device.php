@@ -6,27 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class PAN
- * @package App\Models
+ * Class Device
  * @mixin \Eloquent
  */
-
-class PAN extends Model
+class Device extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
     public function digitized_cards()
     {
-        return $this->hasMany(DigitizedCard::class, 'pan_id');
-    }
-
-    public function show(){
-
+        return $this->hasMany(DigitizedCard::class, 'device_id');
     }
 }
