@@ -26,7 +26,7 @@
                 <dt>
                     Pan
                 </dt>
-                <dd>{{$pan->PAN}}</dd>
+                <dd>{{$pan->pan}}</dd>
             </dl>
             <dl>
                 <dt>

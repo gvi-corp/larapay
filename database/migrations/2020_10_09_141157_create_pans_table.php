@@ -13,15 +13,15 @@ class CreatePANSTable extends Migration
      */
     public function up()
     {
-        Schema::create('p_a_n_s', function (Blueprint $table) {
+        Schema::create('pans', function (Blueprint $table) {
             $table->id();
-            $table->string("PAN",25)->unique();
+            $table->string("pan", 25)->unique();
             $table->string("name");
             $table->text("description")->default('');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-           $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +32,6 @@ class CreatePANSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_a_n_s');
+        Schema::dropIfExists('pans');
     }
 }

@@ -35,7 +35,7 @@ class StoreDigitizedCard extends FormRequest
                 'pan_id.required' => 'required',
                 'pan_id.filled' => 'filled',
                 'pan_id.integer' => 'integer',
-                'pan_id.exists' => Rule::exists('p_a_n_s', 'id')->where('user_id', auth()->user()->id),
+                'pan_id.exists' => Rule::exists('pans', 'id')->where('user_id', auth()->user()->id),
                 'pan_id.unique' => 'unique:digitized_cards,pan_id,NULL,id,device_id,' . request()->device_id
             ],
             'device_id' => [

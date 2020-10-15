@@ -27,9 +27,9 @@
                                 name="pan_id">
                             @foreach(@auth()->user()->pans as $pan)
                                 <option value="{{$pan->id}}" @if($loop->first) selected="selected" @endif
-                                    {{-- title="{{$pan->PAN}}"--}}
+                                    {{-- title="{{$pan->pan}}"--}}
                                 >
-                                    {{$pan->name}} ({{$pan->PAN}})
+                                    {{$pan->name}} ({{$pan->pan}})
                                 </option>>
                             @endforeach
                         </select>

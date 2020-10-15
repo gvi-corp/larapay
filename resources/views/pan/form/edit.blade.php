@@ -13,7 +13,7 @@
                         <input type="text" class="form-control" id="pan-pan" aria-describedby="pan"
                                name="pan"
                                placeholder="Enter your Primary Account Number"
-                               value="{{$pan->PAN}}"
+                               value="{{$pan->pan}}"
                                maxlength="16">
                         @error('pan_pan')
                         <small id="pan_error"
