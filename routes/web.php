@@ -23,6 +23,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 //tweak to cut out auth middleware "static" redirection to home
 Route::get('/home', function (){return redirect('/');});
 
-Route::resource('pan',PANController::class);
-Route::resource('digitized_card', DigitizedCardController::class);
-Route::resource('device', DeviceController::class);
+Route::resource('pan',PANController::class)->middleware('auth');
+Route::resource('digitized_card', DigitizedCardController::class)->middleware('auth');
+Route::resource('device', DeviceController::class)->middleware('auth');
