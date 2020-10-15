@@ -279,10 +279,92 @@ class PANTest extends TestCase
             $dc_b
         ];
 
-        foreach ($dcs as $dc){
+        foreach ($dcs as $dc) {
             $this->actingAs($user)->get(route('digitized_card.index'))->assertSee($dc->name);
         }
     }
+
+
+    /** @test */
+    public function a_user_can_see_some_analytics_data_on_his_payments()
+    {
+        $user = User::factory()->create();
+
+        $user = User::factory()->create();
+
+        //Creating Means of Paiement
+        $pan_a_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "pan" => intval("51" . $this->faker->unique()->numerify(implode(array_fill(0, 14, '#')))),
+            "description" => "PAN A",
+            "user_id" => $user->id
+        ];
+
+        $pan_a = PAN::create($pan_a_attributes);
+
+        //$this->assertDatabaseHas('pans', $pan_a_attributes);
+        //$this->assertDatabaseHas('pans', $pan_b_attributes);
+
+        //Creating Devices
+        $device_a_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "type" => "Smartphone",
+            "os" => "iOS",
+            "description" => "Device A",
+            "user_id" => $user->id
+        ];
+
+        $device_a = Device::create($device_a_attributes);
+
+        //$this->assertDatabaseHas('devices', $device_a_attributes);
+        //$this->assertDatabaseHas('devices', $device_b_attributes);
+
+
+        //Creating a Digitized Card with both a registered device and a registered PAN
+        $dc_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "description" => "Digitized Card Example",
+            "pan_id" => $pan_a->id,
+            "device_id" => $device_a->id,
+            "user_id" => $user->id
+        ];
+
+        $dc_a = DigitizedCard::create($dc_attributes);
+
+        $payement_a_attributes = [
+            "title" => $this->faker->words(5, true),
+            "description" => $this->faker->sentence,
+            "amount" => $this->faker->numberBetween(1, 222),
+            "currency" => "USD",
+            "seller" => $this->faker->name,
+            "digitized_card_id" => $dc_a->id,
+            //"user_id" => $user->id
+        ];
+
+        $payement_b_attributes = [
+            "title" => $this->faker->words(5, true),
+            "description" => $this->faker->sentence,
+            "amount" => $this->faker->numberBetween(1, 222),
+            "currency" => "USD",
+            "seller" => $this->faker->name,
+            "digitized_card_id" => $dc_a->id,
+            //"user_id" => $user->id
+        ];
+
+        $this->actingAs($user)->post(route('payment.store'),$payement_a_attributes);
+        $this->actingAs($user)->post(route('payment.store'),$payement_b_attributes);
+
+        $this->assertDatabaseHas('payments',$payement_a_attributes);
+        $this->assertDatabaseHas('payments',$payement_b_attributes);
+
+
+        foreach ($user->payments()->latest()->take(10)->get() as $payment) {
+            dump("PAYYY !!");
+            $this->actingAs($user)->get(route('payment.index'))->assertSee($payment->amount . ' ' . $payment->currency);
+        }
+
+    }
+
 
     /** @testx */
     public function a_user_can_create_a_pan()
