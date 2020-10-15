@@ -16,7 +16,7 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->text("description")->default('');
+            $table->text("description")->nullable()->default('');
             $table->enum('type', ['Smartphone', 'Tablet', 'Watch', 'Other'])->default('Smartphone');
             $table->enum('os', ['Android', 'iOS', 'Other'])->default('Android');
             $table->unsignedBigInteger('user_id');

@@ -23,7 +23,7 @@ class PANTest extends TestCase
         $attributes = [
             "name" => $this->faker->unique()->name,
             "email" => $this->faker->unique()->email,
-            "password" => $this->faker->password
+            "password" => $this->faker->password(8)
         ];
 
         $attributes['password_confirmation'] = $attributes['password'];
@@ -206,9 +206,7 @@ class PANTest extends TestCase
     /** @test */
     public function a_user_can_see_a_list_of_his_digitized_cards()
     {
-        $this->withoutExceptionHandling();
-        $user = User::factory()->create();
-
+//        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         //Creating Means of Paiement

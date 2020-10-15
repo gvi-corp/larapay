@@ -17,7 +17,7 @@ class CreatePANSTable extends Migration
             $table->id();
             $table->string("pan", 25)->unique();
             $table->string("name");
-            $table->text("description")->default('');
+            $table->text("description")->nullable()->default('');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

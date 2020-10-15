@@ -17,7 +17,7 @@ class CreateDigitizedCardsTable extends Migration
             $table->id();
 
             $table->string("name");
-            $table->text("description");
+            $table->text("description")->nullable()->default('');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('device_id');
             //for redundant untransitive relation
