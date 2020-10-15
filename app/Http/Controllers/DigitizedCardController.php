@@ -16,7 +16,7 @@ class DigitizedCardController extends Controller
      */
     public function index()
     {
-        //
+        return view('digitized_card.index');
     }
 
     /**

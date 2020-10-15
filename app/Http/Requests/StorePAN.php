@@ -32,12 +32,12 @@ class StorePAN extends FormRequest
                 'pan.regex' => 'regex:/^5[1-5]\d{14}$/',
                 //requiring Visa PAN pattern
                 //'regex:^4\d{15}$'
-                'pan.unique' => 'unique:p_a_n_s,pan'
+                'pan.unique' => 'unique:pans,pan'
             ],
             'name' => [
                 'name.required' => 'required',
                 'name.filled' => 'filled',
-                'name.unique' => 'unique:p_a_n_s,name,user_id'
+                'name.unique' => 'unique:pans,name,user_id'
             ],
             'description' => 'nullable|string'
         ];
