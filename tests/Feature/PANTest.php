@@ -203,6 +203,89 @@ class PANTest extends TestCase
         $this->assertDatabaseMissing('digitized_cards', $dc_a_attributes);
     }
 
+    /** @test */
+    public function a_user_can_see_a_list_of_his_digitized_cards()
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+
+        $user = User::factory()->create();
+
+        //Creating Means of Paiement
+        $pan_a_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "pan" => intval("51" . $this->faker->unique()->numerify(implode(array_fill(0, 14, '#')))),
+            "description" => "PAN A",
+            "user_id" => $user->id
+        ];
+
+        $pan_b_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "pan" => intval("51" . $this->faker->unique()->numerify(implode(array_fill(0, 14, '#')))),
+            "description" => "PAN B",
+            "user_id" => $user->id
+        ];
+
+        $pan_a = PAN::create($pan_a_attributes);
+        $pan_b = PAN::create($pan_b_attributes);
+
+        $this->assertDatabaseHas('pans', $pan_a_attributes);
+        $this->assertDatabaseHas('pans', $pan_b_attributes);
+
+        //Creating Devices
+        $device_a_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "type" => "Smartphone",
+            "os" => "iOS",
+            "description" => "Device A",
+            "user_id" => $user->id
+        ];
+
+        $device_b_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "type" => "Tablet",
+            "os" => "Android",
+            "description" => "Device B",
+            "user_id" => $user->id
+        ];
+
+        $device_a = Device::create($device_a_attributes);
+        $device_b = Device::create($device_b_attributes);
+
+        $this->assertDatabaseHas('devices', $device_a_attributes);
+        $this->assertDatabaseHas('devices', $device_b_attributes);
+
+        //Creating a Digitized Card with both a registered device and a registered PAN
+        $dc_a_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "description" => "Digitized Card Example",
+            "pan_id" => $pan_a->id,
+            "device_id" => $device_a->id,
+            "user_id" => $user->id
+        ];
+
+        $dc_b_attributes = [
+            "name" => $this->faker->unique()->words(5, true),
+            "description" => "Digitized Card Example 2",
+            "pan_id" => $pan_b->id,
+            "device_id" => $device_b->id,
+            "user_id" => $user->id
+        ];
+
+
+        $dc_a = DigitizedCard::create($dc_a_attributes);
+        $dc_b = DigitizedCard::create($dc_b_attributes);
+
+        $dcs = [
+            $dc_a,
+            $dc_b
+        ];
+
+        foreach ($dcs as $dc){
+            $this->actingAs($user)->get(route('digitized_card.index'))->assertSee($dc->name);
+        }
+    }
+
     /** @testx */
     public function a_user_can_create_a_pan()
     {
