@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DigitizedCardController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PANController;
 
@@ -26,3 +27,4 @@ Route::get('/home', function (){return redirect('/');});
 Route::resource('pan',PANController::class)->middleware('auth');
 Route::resource('digitized_card', DigitizedCardController::class)->middleware('auth');
 Route::resource('device', DeviceController::class)->middleware('auth');
+Route::resource('payment', PaymentController::class)->middleware('auth');

@@ -44,7 +44,7 @@
                         @if($errors->any())
                         @endif
 
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Update">
 
                     </div>
                 </form>

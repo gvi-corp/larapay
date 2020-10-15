@@ -45,6 +45,9 @@
                         <li class="nav-item{{request()->url() == route('digitized_card.create')?' active':''}}">
                             <a class="nav-link" href="{{route('digitized_card.create')}}">Invoke a Digital Card</a>
                         </li>
+                        <li class="nav-item{{request()->url() == route('payment.create')?' active':''}}">
+                            <a class="nav-link" href="{{route('payment.create')}}">Pay !</a>
+                        </li>
                     @endauth
                 </ul>
 
@@ -58,6 +61,9 @@
                         </li>
                         <li class="nav-item{{request()->url() == route('digitized_card.index')?' active':''}}">
                             <a class="nav-link" href="{{route('digitized_card.index')}}">My Digital Cards</a>
+                        </li>
+                        <li class="nav-item{{request()->url() == route('payment.index')?' active':''}}">
+                            <a class="nav-link" href="{{route('payment.index')}}">My Payments</a>
                         </li>
                     @endauth
                 </ul>
