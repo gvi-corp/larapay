@@ -7,6 +7,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        @include('device.partial.show',['device' => $device])
+        <h1>My 10 latest payments</h1>
+        @include('payment.partial.index',['payments' => auth()->user()->payments()->latest()->take(10)->get()])
     </div>
 @endsection

@@ -7,7 +7,6 @@
                 {{ session('status') }}
             </div>
         @endif
-        <h1>My digitized cards</h1>
-        @include('digitized_card.partial.index')
+        @include('payment.partial.show',['payment' => $payment])
     </div>
 @endsection

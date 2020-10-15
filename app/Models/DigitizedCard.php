@@ -26,4 +26,9 @@ class DigitizedCard extends Model
     public function device(){
         return $this->belongsTo(Device::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

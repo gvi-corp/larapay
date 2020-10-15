@@ -88,6 +88,6 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->delete();
-        return redirect('home')->with('status', 'Appareil supprimé !');
+        return redirect('/')->with('status', 'Appareil supprimé !');
     }
 }

@@ -41,7 +41,6 @@ class DigitizedCardController extends Controller
         $digitized_card->user_id = auth()->user()->id;
         $digitized_card->save();
         return redirect(route('digitized_card.show', ['digitized_card' => $digitized_card]))->with('status', 'Nouvelle carte digitalisée enregistrée !');
-
     }
 
     /**
@@ -89,6 +88,6 @@ class DigitizedCardController extends Controller
     public function destroy(DigitizedCard $digitized_card)
     {
         $digitized_card->delete();
-        return redirect('home')->with('status', 'Carte Digitalisée supprimée !');
+        return redirect('/')->with('status', 'Carte Digitalisée supprimée !');
     }
 }

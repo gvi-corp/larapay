@@ -87,6 +87,6 @@ class PANController extends Controller
     public function destroy(PAN $pan)
     {
         $pan->delete();
-        return redirect('home')->with('status', 'PAN supprimé !');
+        return redirect('/')->with('status', 'PAN supprimé !');
     }
 }
